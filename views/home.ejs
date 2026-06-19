@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Course Builder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-zinc-950 text-white min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="border-b border-orange-500/20 bg-zinc-900">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between">
+      <h1 class="text-2xl font-bold text-orange-500">
+        AI Course Builder
+      </h1>
+
+      <div class="space-x-6">
+        <a href="/" class="hover:text-orange-500">Home</a>
+        <a href="/dashboard" class="hover:text-orange-500">Dashboard</a>
+        <a href="/auth" class="hover:text-orange-500">Login</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="max-w-6xl mx-auto px-6 py-20">
+
+    <div class="text-center">
+      <h1 class="text-6xl font-bold mb-4">
+        Fly High.
+      </h1>
+
+      <p class="text-zinc-400 text-xl">
+        Build Your Future One Skill At A Time.
+      </p>
+    </div>
+
+    <div class="max-w-3xl mx-auto mt-16 bg-zinc-900 p-8 rounded-3xl border border-orange-500/20">
+
+      <h2 class="text-3xl font-bold mb-6">
+        Generate Your Learning Roadmap
+      </h2>
+
+      <form class="space-y-5">
+
+        <input
+          type="text"
+          placeholder="Goal (e.g MERN Developer)"
+          class="w-full bg-zinc-800 p-4 rounded-xl"
+        >
+
+        <select class="w-full bg-zinc-800 p-4 rounded-xl">
+          <option>Beginner</option>
+          <option>Intermediate</option>
+          <option>Advanced</option>
+        </select>
+
+        <input
+          type="number"
+          placeholder="Hours Per Day"
+          class="w-full bg-zinc-800 p-4 rounded-xl"
+        >
+
+        <button
+          class="w-full bg-orange-500 hover:bg-orange-600 py-4 rounded-xl font-bold"
+        >
+          Generate Roadmap
+        </button>
+
+      </form>
+
+    </div>
+
+  </section>
+
+</body>
+</html>
