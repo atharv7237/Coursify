@@ -6,7 +6,7 @@ module.exports.isLoggedIn = async function (req,res,next) {
         if(!req.cookies.Token)
         {
             req.flash('error','Something Went Wrong Please Re login ....')
-            return res.redirect('/auth')
+            return res.redirect('/')
         }
         else
         {
@@ -14,7 +14,7 @@ module.exports.isLoggedIn = async function (req,res,next) {
         let user = await User.findById(decoded._id).select('-Password')
         if (!user) {
         req.flash('error','User Not Found Retry ....')
-        return res.redirect("/auth");
+        return res.redirect("/");
         }               
         req.user = user
         next()
@@ -24,6 +24,6 @@ module.exports.isLoggedIn = async function (req,res,next) {
     {
         console.log(error.message)
         req.flash('error','Something Went Wrong')
-        return res.redirect("/auth");
+        return res.redirect("/");
     }
 }
