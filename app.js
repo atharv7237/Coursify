@@ -24,6 +24,9 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/',async(req,res)=>{
+  res.render('auth')
+})
 app.use('/auth', authRoute)
 app.use('/roadmap', roadmapRoute)
 
