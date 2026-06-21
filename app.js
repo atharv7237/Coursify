@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const jwt = require('jsonwebtoken')
@@ -6,7 +7,6 @@ const cookieParser = require('cookie-parser')
 const path = require('path')
 const authRoute = require('./routes/authRoutes')
 const roadmapRoute = require('./routes/roadmapRoutes')
-require('dotenv').config()
 const db = require('./config/db')
 const session = require('express-session');
 const flash = require('connect-flash');

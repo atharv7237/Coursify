@@ -1,10 +1,9 @@
-module.exports.generatePrompt = (goal, level, hours, months, Domain) => {
+module.exports.generatePrompt = (goal, level, hours, months) => {
 return `
 You are an expert career mentor and roadmap planner.
 
 Generate a personalized learning roadmap using the following information:
 
-Domain: ${Domain}
 Goal: ${goal}
 Current Level: ${level}
 Study Hours Per Day: ${hours}
@@ -25,7 +24,7 @@ Requirements:
 
 Output Format:
 
-# Roadmap Overview
+# Roadmap Overviewgenerate
 
 ## Month 1
 
@@ -55,6 +54,14 @@ Mini Project:
 
 ## Expected Outcome
 
-...
+Generate a roadmap in HTML format.
+
+Use:
+<h1>
+<h2>
+<ul>
+<li>
+
+Do not use markdown.
 `;
 }

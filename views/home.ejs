@@ -42,15 +42,15 @@
         Generate Your Learning Roadmap
       </h2>
 
-      <form class="space-y-5">
-
+      <form class="space-y-5" action="/roadmap/generate" method="post" >
         <input
           type="text"
+          name="goal"
           placeholder="Goal (e.g MERN Developer)"
           class="w-full bg-zinc-800 p-4 rounded-xl"
         >
 
-        <select class="w-full bg-zinc-800 p-4 rounded-xl">
+        <select class="w-full bg-zinc-800 p-4 rounded-xl" name="level">
           <option>Beginner</option>
           <option>Intermediate</option>
           <option>Advanced</option>
@@ -58,12 +58,21 @@
 
         <input
           type="number"
+          name="hours"
           placeholder="Hours Per Day"
+          class="w-full bg-zinc-800 p-4 rounded-xl"
+        >
+
+        <input
+          type="number"
+          name="months"
+          placeholder="How many months ?1"
           class="w-full bg-zinc-800 p-4 rounded-xl"
         >
 
         <button
           class="w-full bg-orange-500 hover:bg-orange-600 py-4 rounded-xl font-bold"
+          type="submit"
         >
           Generate Roadmap
         </button>

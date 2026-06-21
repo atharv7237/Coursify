@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
+
 let RoadmapSchema = new mongoose.Schema({
- Domain:String,
  userId:{
     type: mongoose.Schema.Types.ObjectId,
     ref:"User"
