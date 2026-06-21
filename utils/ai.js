@@ -4,6 +4,7 @@ const ai = new GoogleGenAI({
 });
 
 module.exports.generate = async(prompt)=> {
+  try{
   const response = await ai.models.generateContent({
     model: "gemini-3.5-flash",
     contents:prompt,
@@ -14,6 +15,12 @@ module.exports.generate = async(prompt)=> {
     },
   });
   return response.text;
+}
+catch(error)
+{
+  
+  return res.send(error.message)
+}
 }
 
 

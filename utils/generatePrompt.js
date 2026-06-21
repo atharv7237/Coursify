@@ -20,48 +20,63 @@ Requirements:
 7. Keep the roadmap realistic for the provided study hours.
 8. Do not recommend paid resources.
 9. Explain why each topic is important.
-10. Return the response in proper Markdown format.
+
 
 Output Format:
+Provide Output in Valid JSON format 
+Do not wrap the response inside markdown code blocks.
+Do not use \`\`\`json or \`\`\`
+{
+  "roadmapTitle": "",
+  "overview": "",
 
-# Roadmap Overviewgenerate
+  "duration": "",
+  "studyHoursPerDay": "",
 
-## Month 1
+  "milestones": [
+    {
+      "title": "",
+      "duration": "",
 
-Topics:
+      "description": "",
 
-* ...
+      "topics": [
+        ""
+      ],
 
-Why Learn:
+      "whyImportant": [
+        ""
+      ],
 
-* ...
+      "resources": [
+        {
+          "title": "",
+          "type": "",
+          "platform": ""
+        }
+      ],
 
-Resources:
+      "project": {
+        "title": "",
+        "description": ""
+      }
+    }
+  ],
 
-* ...
+  "finalProject": {
+    "title": "",
+    "description": ""
+  },
 
-Mini Project:
+  "expectedOutcome": "",
 
-* ...
+  "skillsGained": [
+    ""
+  ]
+}
 
-## Month 2
 
-...
+end of prompt 
 
-## Final Project
-
-...
-
-## Expected Outcome
-
-Generate a roadmap in HTML format.
-
-Use:
-<h1>
-<h2>
-<ul>
-<li>
-
-Do not use markdown.
 `;
 }

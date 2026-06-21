@@ -4,6 +4,7 @@ const { isLoggedIn } = require('../middlewares/isLoggedIn')
 const router = express.Router()
 
 router.get('/',(req,res)=>{
+    res.clearCookie('Token')
     res.render('auth')
 })
 

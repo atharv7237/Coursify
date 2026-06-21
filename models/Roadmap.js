@@ -13,7 +13,11 @@ let RoadmapSchema = new mongoose.Schema({
     default:"Beginner"
 },
  hours:Number,
- roadmap:String,
+ generatedroadmap:
+ {
+    type: mongoose.Schema.Types.Mixed,
+    required: true
+ },
  createdAt:{
         type:Date,
         default:Date.now

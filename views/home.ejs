@@ -17,7 +17,6 @@
       </h1>
 
       <div class="space-x-6">
-        <a href="/" class="hover:text-orange-500">Home</a>
         <a href="/roadmap/dashboards" class="hover:text-orange-500">Dashboard</a>
         <a href="/auth/logout" class="hover:text-orange-500">Logout</a>
       </div>
@@ -42,7 +41,7 @@
         Generate Your Learning Roadmap
       </h2>
 
-      <form class="space-y-5" action="/roadmap/generate" method="post" >
+      <form id="roadmapForm"  class="space-y-5" action="/roadmap/generate" method="post" >
         <input
           type="text"
           name="goal"
@@ -73,6 +72,7 @@
         <button
           class="w-full bg-orange-500 hover:bg-orange-600 py-4 rounded-xl font-bold"
           type="submit"
+          id="generateBtn"
         >
           Generate Roadmap
         </button>
@@ -82,6 +82,24 @@
     </div>
 
   </section>
+<script>
 
+const form = document.getElementById('roadmapForm');
+const btn = document.getElementById('generateBtn');
+
+form.addEventListener('submit', () => {
+
+    btn.innerHTML = `
+        <span class="animate-pulse">
+            Generating Roadmap...
+        </span>
+    `;
+
+    btn.disabled = true;
+
+});
+
+</script>
 </body>
+
 </html>

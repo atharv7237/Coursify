@@ -25,7 +25,7 @@ module.exports.Register = async (req,res) => {
     console.log(token)
     res.cookie('Token',token)
     req.user = createUser.Email
-    res.send('User created Succesfully')  
+    res.redirect('/roadmap/home') 
     } 
     } catch (e) {
         console.log(e.message)
@@ -37,6 +37,7 @@ module.exports.Register = async (req,res) => {
 
 module.exports.Login = async (req,res) => {
      try {
+        
         let {email , password} = req.body ;
         let user  = await User.findOne({Email:email})
         if(!user) 
