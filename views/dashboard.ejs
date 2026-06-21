@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,54 +10,59 @@
 
 <body class="bg-zinc-950 text-white">
 
-<nav class="border-b border-orange-500/20 bg-zinc-900">
-  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between">
+  <nav class="border-b border-orange-500/20 bg-zinc-900">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between">
 
-    <h1 class="text-2xl font-bold text-orange-500">
-      AI Course Builder
-    </h1>
+      <h1 class="text-2xl font-bold text-orange-500">
+        AI Course Builder
+      </h1>
 
-    <a href="/roadmap/home" class="bg-orange-500 px-2.5 py-1 rounded-md">
-      Back
-    </a>
-
-  </div>
-</nav>
-
-<section class="max-w-7xl mx-auto px-6 py-12">
-
-  <h1 class="text-5xl font-bold mb-2">
-    My Roadmaps
-  </h1>
-
-  <p class="text-zinc-400 mb-10">
-    Continue your learning journey.
-  </p>
-
-  <div class="grid md:grid-cols-3 gap-6">
-
-    <div class="bg-zinc-900 p-6 rounded-2xl border border-orange-500/20">
-
-      <h2 class="text-xl font-bold">
-        MERN Developer
-      </h2>
-
-      <p class="text-zinc-400 mt-2">
-        Beginner • 2 hrs/day
-      </p>
-
-      <a
-        href="/roadmap/roadmapid"
-        class="inline-block mt-6 bg-orange-500 px-4 py-2 rounded-lg"
-      >
-        View
+      <a href="/roadmap/home" class="bg-orange-500 px-2.5 py-1 rounded-md">
+        Back
       </a>
 
     </div>
+  </nav>
 
-  </div>
+  <section class="max-w-7xl mx-auto px-6 py-12">
 
-</section>
+    <h1 class="text-5xl font-bold mb-2">
+      My Roadmaps
+    </h1>
+
+    <p class="text-zinc-400 mb-10">
+      Continue your learning journey.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <% if(roadmaps.length> 0 ) { %>
+
+        <% roadmaps.forEach((roadmap)=>{ %>
+          <div class="bg-zinc-900 p-6 rounded-2xl border border-orange-500/20">
+
+            <h2 class="text-xl font-bold">
+              <%= roadmap.goal %>
+            </h2>
+
+            <p class="text-zinc-400 mt-2">
+              <%= roadmap.level %> • <%= roadmap.hours%> hrs/day 
+            </p>
+
+            <a href="/roadmap/dashboards/<%=roadmap._id%>" class="inline-block mt-6 bg-orange-500 px-4 py-2 rounded-lg">
+              View
+            </a>
+
+          </div>
+          <% })}else { %>
+            <h1>No Roadmap Generated Yet ....</h1>
+            <% } %>
+
+
+    </div>
+
+  </section>
 
 </body>
+
 </html>

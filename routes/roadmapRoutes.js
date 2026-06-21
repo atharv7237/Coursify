@@ -8,7 +8,7 @@ router.get('/home', isLoggedIn , home)
 
 router.get('/dashboards' , isLoggedIn , dashboards)
 
-router.get('/:roadmapid', isLoggedIn ,roadmap)
+router.get('/dashboards/:roadmapid', isLoggedIn , roadmap)
 
 router.post('/generate', isLoggedIn , generate )
 

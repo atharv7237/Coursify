@@ -8,11 +8,16 @@ module.exports.home = async (req,res) => {
 }
 
 module.exports.dashboards = async (req,res) => {
-    res.render('dashboard')
+    let user = req.user
+    let roadmaps = await Roadmap.find({userId:user._id})
+    res.render('dashboard' , { roadmaps })
 }
 
 module.exports.roadmap = async (req,res) => {
-    res.render('roadmap')
+    let id = req.params.roadmapid
+    let roadmap = await Roadmap.findOne({_id:id})
+
+    res.render('roadmap',{roadmap})
 }
 
 module.exports.generate = async (req,res) => {
@@ -31,8 +36,7 @@ module.exports.generate = async (req,res) => {
     })
     
     let updateUser = await User.findByIdAndUpdate(user._id,{$push:{Roadmaps:roadmap._id}}, { new: true, runValidators: true })
-
-    res.send('Updated')
+    res.redirect(`/roadmap/dashboards/${roadmap._id}`)
     } catch (error) {
         console.log("Error",error)
     }
