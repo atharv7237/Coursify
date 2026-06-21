@@ -65,7 +65,7 @@ module.exports.Login = async (req,res) => {
 module.exports.Logout = async (req,res) => {
     try {
     res.clearCookie("Token");
-    res.redirect('/auth')
+    res.redirect('/')
         
     } catch (error) {
         console.log(error.message)
