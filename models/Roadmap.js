@@ -6,13 +6,20 @@ let RoadmapSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref:"User"
     },
- goal:String,
+ goal:{
+   type:String,
+   required:true
+ },
  level:{
     type:String,
     enum:["Beginner","Intermediate","Advanced"],
+    required:true,
     default:"Beginner"
 },
- hours:Number,
+ hours:{
+ type:Number,
+ required:true
+ },
  generatedroadmap:
  {
     type: mongoose.Schema.Types.Mixed,
