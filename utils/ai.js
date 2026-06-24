@@ -19,7 +19,7 @@ module.exports.generate = async(prompt)=> {
 catch(error)
 {
   
-  return res.send(error.message)
+    return error.message
 }
 }
 

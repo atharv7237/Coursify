@@ -1,238 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= roadmap.generatedroadmap.roadmapTitle %></title>
+    <title>
+        <%= roadmap.generatedroadmap.roadmapTitle %>
+    </title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-zinc-950 text-white">
 
-<!-- NAVBAR -->
-<nav class="border-b border-orange-500/20 bg-zinc-900 sticky top-0">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-        <h1 class="text-xl font-bold text-orange-500">
-            Coursify
-        </h1>
+    <!-- NAVBAR -->
+    <nav class="border-b border-orange-500/20 bg-zinc-900 sticky top-0">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-orange-500">
+                Coursify
+            </h1>
 
-        <a href="/roadmap/dashboards"
-            class="bg-orange-500 px-4 py-2 rounded-lg hover:bg-orange-600">
-            Back
-        </a>
-    </div>
-</nav>
-
-<div class="max-w-6xl mx-auto px-6 py-10">
-
-    <!-- HERO -->
-    <section class="mb-10">
-
-        <h1 class="text-5xl font-bold mb-4">
-            <%= roadmap.generatedroadmap.roadmapTitle %>
-        </h1>
-
-        <p class="text-zinc-400 text-lg mb-6">
-            <%= roadmap.generatedroadmap.overview %>
-        </p>
-
-        <div class="grid md:grid-cols-3 gap-4">
-
-            <div class="bg-zinc-900 p-5 rounded-xl border border-orange-500/20">
-                <p class="text-zinc-400">Duration</p>
-                <h3 class="text-xl font-semibold">
-                    <%= roadmap.generatedroadmap.duration %>
-                </h3>
-            </div>
-
-            <div class="bg-zinc-900 p-5 rounded-xl border border-orange-500/20">
-                <p class="text-zinc-400">Study Hours</p>
-                <h3 class="text-xl font-semibold">
-                    <%= roadmap.generatedroadmap.studyHoursPerDay %>
-                </h3>
-            </div>
-
-            <div class="bg-zinc-900 p-5 rounded-xl border border-orange-500/20">
-                <p class="text-zinc-400">Level</p>
-                <h3 class="text-xl font-semibold">
-                    <%= roadmap.level %>
-                </h3>
-            </div>
-
+            <a href="/roadmap/dashboards" class="bg-orange-500 px-4 py-2 rounded-lg hover:bg-orange-600">
+                Back
+            </a>
+            <form action="/roadmap/delete/<%= roadmap._id %>" method="POST">
+                <button type="submit" class="bg-red-500 px-4 py-2 rounded-lg">
+                    Delete Roadmap
+                </button>
+            </form>
         </div>
+    </nav>
 
-    </section>
+    <div class="max-w-6xl mx-auto px-6 py-10">
+        <% if(error.length> 0 ) { %>
+            <h2>
+                <%= error[0] %>
+            </h2>
+            <% } %>
+                <!-- HERO -->
+                <section class="mb-10">
 
-    <!-- SKILLS -->
-    <section class="mb-12">
+                    <h1 class="text-5xl font-bold mb-4">
+                        <%= roadmap.generatedroadmap.roadmapTitle %>
+                    </h1>
 
-        <h2 class="text-3xl font-bold mb-6">
-            Skills You'll Gain
-        </h2>
+                    <p class="text-zinc-400 text-lg mb-6">
+                        <%= roadmap.generatedroadmap.overview %>
+                    </p>
 
-        <div class="flex flex-wrap gap-3">
+                    <div class="grid md:grid-cols-3 gap-4">
 
-            <% roadmap.generatedroadmap.skillsGained.forEach(skill => { %>
+                        <div class="bg-zinc-900 p-5 rounded-xl border border-orange-500/20">
+                            <p class="text-zinc-400">Duration</p>
+                            <h3 class="text-xl font-semibold">
+                                <%= roadmap.generatedroadmap.duration %>
+                            </h3>
+                        </div>
 
-                <span class="bg-orange-500/10 border border-orange-500/30 px-4 py-2 rounded-full">
-                    <%= skill %>
-                </span>
+                        <div class="bg-zinc-900 p-5 rounded-xl border border-orange-500/20">
+                            <p class="text-zinc-400">Study Hours</p>
+                            <h3 class="text-xl font-semibold">
+                                <%= roadmap.generatedroadmap.studyHoursPerDay %>
+                            </h3>
+                        </div>
 
-            <% }) %>
+                        <div class="bg-zinc-900 p-5 rounded-xl border border-orange-500/20">
+                            <p class="text-zinc-400">Level</p>
+                            <h3 class="text-xl font-semibold">
+                                <%= roadmap.level %>
+                            </h3>
+                        </div>
 
-        </div>
+                    </div>
 
-    </section>
+                </section>
 
-    <!-- LEARNING ROADMAP -->
-    <section>
+                <!-- SKILLS -->
+                <section class="mb-12">
 
-        <h2 class="text-4xl font-bold mb-8">
-            Learning Roadmap
-        </h2>
+                    <h2 class="text-3xl font-bold mb-6">
+                        Skills You'll Gain
+                    </h2>
 
-        <% roadmap.generatedroadmap.milestones.forEach(milestone => { %>
+                    <div class="flex flex-wrap gap-3">
 
-            <div class="bg-zinc-900 border border-orange-500/20 rounded-2xl p-8 mb-8">
+                        <% roadmap.generatedroadmap.skillsGained.forEach(skill=> { %>
 
-                <!-- TITLE -->
-                <h2 class="text-3xl font-bold text-orange-500 mb-2">
-                    <%= milestone.title %>
-                </h2>
+                            <span class="bg-orange-500/10 border border-orange-500/30 px-4 py-2 rounded-full">
+                                <%= skill %>
+                            </span>
 
-                <p class="text-zinc-400 mb-2">
-                    <%= milestone.duration %>
-                </p>
+                            <% }) %>
 
-                <p class="mb-6">
-                    <%= milestone.description %>
-                </p>
+                    </div>
 
-                <!-- TOPICS -->
-                <div class="mb-6">
+                </section>
 
-                    <h3 class="text-xl font-semibold mb-3">
-                        Topics
-                    </h3>
+                <!-- LEARNING ROADMAP -->
+                <section>
 
-                    <ul class="space-y-2">
+                    <h2 class="text-4xl font-bold mb-8">
+                        Learning Roadmap
+                    </h2>
 
-                        <% milestone.topics.forEach(topic => { %>
+                    <% roadmap.generatedroadmap.milestones.forEach(milestone=> { %>
 
-                            <li>
-                                ✓ <%= topic %>
-                            </li>
+                        <div class="bg-zinc-900 border border-orange-500/20 rounded-2xl p-8 mb-8">
 
-                        <% }) %>
+                            <!-- TITLE -->
+                            <h2 class="text-3xl font-bold text-orange-500 mb-2">
+                                <%= milestone.title %>
+                            </h2>
 
-                    </ul>
+                            <p class="text-zinc-400 mb-2">
+                                <%= milestone.duration %>
+                            </p>
 
-                </div>
+                            <p class="mb-6">
+                                <%= milestone.description %>
+                            </p>
 
-                <!-- WHY IMPORTANT -->
-                <div class="mb-6">
+                            <!-- TOPICS -->
+                            <div class="mb-6">
 
-                    <h3 class="text-xl font-semibold mb-3">
-                        Why Important
-                    </h3>
+                                <h3 class="text-xl font-semibold mb-3">
+                                    Topics
+                                </h3>
 
-                    <ul class="space-y-2">
+                                <ul class="space-y-2">
 
-                        <% milestone.whyImportant.forEach(reason => { %>
+                                    <% milestone.topics.forEach(topic=> { %>
 
-                            <li>
-                                • <%= reason %>
-                            </li>
+                                        <li>
+                                            ✓ <%= topic %>
+                                        </li>
 
-                        <% }) %>
+                                        <% }) %>
 
-                    </ul>
+                                </ul>
 
-                </div>
+                            </div>
 
-                <!-- RESOURCES -->
-                <div class="mb-6">
+                            <!-- WHY IMPORTANT -->
+                            <div class="mb-6">
 
-                    <h3 class="text-xl font-semibold mb-3">
-                        Resources
-                    </h3>
+                                <h3 class="text-xl font-semibold mb-3">
+                                    Why Important
+                                </h3>
 
-                    <div class="grid md:grid-cols-2 gap-4">
+                                <ul class="space-y-2">
 
-                        <% milestone.resources.forEach(resource => { %>
+                                    <% milestone.whyImportant.forEach(reason=> { %>
 
-                            <div class="bg-zinc-800 p-4 rounded-xl">
+                                        <li>
+                                            • <%= reason %>
+                                        </li>
 
-                                <h4 class="font-semibold">
-                                    <%= resource.title %>
+                                        <% }) %>
+
+                                </ul>
+
+                            </div>
+
+                            <!-- RESOURCES -->
+                            <div class="mb-6">
+
+                                <h3 class="text-xl font-semibold mb-3">
+                                    Resources
+                                </h3>
+
+                                <div class="grid md:grid-cols-2 gap-4">
+
+                                    <% milestone.resources.forEach(resource=> { %>
+
+                                        <div class="bg-zinc-800 p-4 rounded-xl">
+
+                                            <h4 class="font-semibold">
+                                                <%= resource.title %>
+                                            </h4>
+
+                                            <p class="text-zinc-400 text-sm">
+                                                <%= resource.type %> • <%= resource.platform %>
+                                            </p>
+
+                                        </div>
+
+                                        <% }) %>
+
+                                </div>
+
+                            </div>
+
+                            <!-- MINI PROJECT -->
+                            <div class="bg-orange-500/10 border border-orange-500/20 p-5 rounded-xl">
+
+                                <h3 class="text-xl font-bold mb-2">
+                                    Mini Project
+                                </h3>
+
+                                <h4 class="font-semibold mb-2">
+                                    <%= milestone.project.title %>
                                 </h4>
 
-                                <p class="text-zinc-400 text-sm">
-                                    <%= resource.type %> • <%= resource.platform %>
+                                <p class="text-zinc-300">
+                                    <%= milestone.project.description %>
                                 </p>
 
                             </div>
 
+                        </div>
+
                         <% }) %>
 
-                    </div>
+                </section>
 
-                </div>
+                <!-- CAPSTONE -->
+                <section class="bg-orange-500/10 border border-orange-500/20 rounded-2xl p-8 mb-10">
 
-                <!-- MINI PROJECT -->
-                <div class="bg-orange-500/10 border border-orange-500/20 p-5 rounded-xl">
+                    <h2 class="text-4xl font-bold mb-4">
+                        🚀 Capstone Project
+                    </h2>
 
-                    <h3 class="text-xl font-bold mb-2">
-                        Mini Project
+                    <h3 class="text-2xl font-semibold mb-4">
+                        <%= roadmap.generatedroadmap.finalProject.title %>
                     </h3>
 
-                    <h4 class="font-semibold mb-2">
-                        <%= milestone.project.title %>
-                    </h4>
-
                     <p class="text-zinc-300">
-                        <%= milestone.project.description %>
+                        <%= roadmap.generatedroadmap.finalProject.description %>
                     </p>
 
-                </div>
+                </section>
 
-            </div>
+                <!-- OUTCOME -->
+                <section class="bg-zinc-900 rounded-2xl p-8 mb-10">
 
-        <% }) %>
+                    <h2 class="text-3xl font-bold mb-4">
+                        What You'll Achieve
+                    </h2>
 
-    </section>
+                    <p class="text-zinc-300">
+                        <%= roadmap.generatedroadmap.expectedOutcome %>
+                    </p>
 
-    <!-- CAPSTONE -->
-    <section class="bg-orange-500/10 border border-orange-500/20 rounded-2xl p-8 mb-10">
+                </section>
 
-        <h2 class="text-4xl font-bold mb-4">
-            🚀 Capstone Project
-        </h2>
-
-        <h3 class="text-2xl font-semibold mb-4">
-            <%= roadmap.generatedroadmap.finalProject.title %>
-        </h3>
-
-        <p class="text-zinc-300">
-            <%= roadmap.generatedroadmap.finalProject.description %>
-        </p>
-
-    </section>
-
-    <!-- OUTCOME -->
-    <section class="bg-zinc-900 rounded-2xl p-8 mb-10">
-
-        <h2 class="text-3xl font-bold mb-4">
-            What You'll Achieve
-        </h2>
-
-        <p class="text-zinc-300">
-            <%= roadmap.generatedroadmap.expectedOutcome %>
-        </p>
-
-    </section>
-
-</div>
+    </div>
 
 </body>
+
 </html>

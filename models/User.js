@@ -10,7 +10,7 @@ FullName:{
         required:true
     },
     Password:{
-    String,
+    type:String,
     required:true
     },
     Roadmaps:[
