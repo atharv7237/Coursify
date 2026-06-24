@@ -8,11 +8,15 @@ module.exports.Register = async (req,res) => {
 
     try {
     let {fullname , email , password } = req.body ;
+    if (!fullname || !email || !password) {
+            req.flash("error", "Please fill all fields");
+            return res.redirect('/');
+        }
     let user = await User.findOne({Email:email})
     if(user) 
     {
         req.flash('error',"User already exist ....")
-        return res.redirect('/auth')
+        return res.redirect('/')
     }
     else{
     const hash = await bcrypt.hash(password, 10);
@@ -39,6 +43,10 @@ module.exports.Login = async (req,res) => {
      try {
         
         let {email , password} = req.body ;
+        if (!email || !password) {
+            req.flash("error", "Please fill all fields");
+            return res.redirect('/');
+        }
         let user  = await User.findOne({Email:email})
         if(!user) 
     {
