@@ -10,6 +10,7 @@ const roadmapRoute = require('./routes/roadmapRoutes')
 const db = require('./config/db')
 const session = require('express-session');
 const flash = require('connect-flash');
+const nodemailer = require('nodemailer')
 
 app.set('view engine','ejs')
 app.use(cookieParser())

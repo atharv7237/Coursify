@@ -31,11 +31,7 @@
     </nav>
 
     <div class="max-w-6xl mx-auto px-6 py-10">
-        <% if(error.length> 0 ) { %>
-            <h2>
-                <%= error[0] %>
-            </h2>
-            <% } %>
+        <% if(roadmap.generatedroadmap && roadmap.generatedroadmap.skillsGained){%>
                 <!-- HERO -->
                 <section class="mb-10">
 
@@ -242,7 +238,9 @@
                     </p>
 
                 </section>
-
+                <%} else { %>
+                <h1> Roadmap generation failed please go back .... </h1>
+                <%}%>
     </div>
 
 </body>

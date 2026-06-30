@@ -14,6 +14,8 @@ module.exports.dashboards = async (req, res) => {
 }
 
 module.exports.roadmap = async (req, res) => {
+    try
+    {
     let id = req.params.roadmapid
     let roadmap = await Roadmap.findOne({ _id: id })
     if (roadmap.userId.toString() !== req.user._id.toString()) {
@@ -22,6 +24,12 @@ module.exports.roadmap = async (req, res) => {
     else {
         res.render('roadmap', { roadmap })
     }
+}
+catch(error)
+{
+    req.flash('error',error.message)
+    return res.redirect('/roadmap/home')
+}
 }
 
 module.exports.generate = async (req, res) => {
@@ -34,8 +42,12 @@ module.exports.generate = async (req, res) => {
         }
         let prompt = generatePrompt(goal, level, hours, months).toString()
         let getResponse = await generate(prompt)
-        console.log(getResponse)
         const formattedresponse = JSON.parse(getResponse)
+        if(formattedresponse.error)
+        {
+            req.flash('error', 'Something went wrong ')
+        return res.redirect('/roadmap/home')
+        }
         let roadmap = await Roadmap.create({
             userId: user._id,
             goal,
