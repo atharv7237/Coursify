@@ -1,0 +1,58 @@
+`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password | Coursify</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-zinc-950 text-white min-h-screen flex items-center justify-center">
+
+    <div class="w-full max-w-md bg-zinc-900 border border-orange-500/20 rounded-2xl p-8 shadow-lg">
+
+        <h1 class="text-3xl font-bold text-orange-500 mb-3">
+            Reset Password
+        </h1>
+
+        <p class="text-zinc-400 mb-8">
+            Create a new password for your account. Make sure it's strong and easy for you to remember.
+        </p>
+
+        <form action="/auth/reset-password" method="POST" class="space-y-6">
+
+            <div>
+                <label class="block mb-2 text-sm font-medium">
+                    New Password
+                </label>
+
+                <input
+                    type="password"
+                    name="newpass"
+                    required
+                    minlength="8"
+                    placeholder="Enter your new password"
+                    class="w-full px-4 py-3 rounded-lg bg-zinc-800 border border-zinc-700 focus:border-orange-500 focus:outline-none">
+            </div>
+
+            <button
+                type="submit"
+                class="w-full bg-orange-500 hover:bg-orange-600 transition py-3 rounded-lg font-semibold">
+                Set New Password
+            </button>
+
+        </form>
+
+        <div class="mt-6 text-center">
+            <a href="/auth/login"
+               class="text-orange-400 hover:underline">
+                Back to Login
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>
+
