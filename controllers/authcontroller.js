@@ -53,7 +53,7 @@ module.exports.Login = async (req,res) => {
         if(!user) 
     {
         req.flash('error',"No User Found")
-        return res.redirect('/auth')
+        return res.redirect('/')
     }
         let check = await bcrypt.compare(password , user.Password)
         if(check){
