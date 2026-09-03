@@ -7,6 +7,7 @@ try {
   host: "smtp.gmail.com",
   port: 587,
   secure: false, // use STARTTLS (upgrade connection to TLS after connecting)
+  family: 4, // use IPv4
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
