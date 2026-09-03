@@ -1,8 +1,9 @@
 const nodemailer = require("nodemailer");
-
+console.log(process.env.SMTP_USER)
 // Create a transporter using SMTP
 const sendEmail = async ( email, Subject, message) => {
-const transporter = nodemailer.createTransport({
+try {
+  const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
   secure: false, // use STARTTLS (upgrade connection to TLS after connecting)
@@ -18,6 +19,10 @@ await transporter.sendMail({
   subject:Subject,
   text:message
 })
+}
+catch (error) {
+  console.log(error.message)
+}
 }
 
 module.exports = sendEmail ;
