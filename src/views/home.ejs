@@ -1,0 +1,106 @@
+<%- include('partials/header', { title: 'Generate Learning Roadmap' }) %>
+<%- include('partials/nav') %>
+
+<main class="flex-grow max-w-5xl mx-auto px-6 py-12 w-full">
+    <%- include('partials/flash') %>
+
+    <div class="text-center mb-12">
+        <h1 class="text-5xl md:text-6xl font-black text-white tracking-tight">
+            Build Your <span class="text-orange-500">Future.</span>
+        </h1>
+        <p class="text-zinc-400 text-lg md:text-xl mt-3">
+            One skill, one milestone, one project at a time.
+        </p>
+    </div>
+
+    <div class="max-w-2xl mx-auto bg-zinc-900/90 p-8 md:p-10 rounded-3xl border border-orange-500/20 shadow-2xl">
+        <h2 class="text-2xl md:text-3xl font-bold mb-6 text-white">
+            Generate Your Learning Roadmap
+        </h2>
+
+        <form id="roadmapForm" class="space-y-6" action="/roadmap/generate" method="POST">
+            <div>
+                <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">
+                    Learning Goal / Role
+                </label>
+                <input
+                    type="text"
+                    name="goal"
+                    required
+                    placeholder="e.g. Full-Stack MERN Developer, AI Engineer, Cloud Architect"
+                    class="w-full bg-zinc-800/90 border border-zinc-700/80 p-4 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
+                >
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">
+                    Current Skill Level
+                </label>
+                <select name="level" class="w-full bg-zinc-800/90 border border-zinc-700/80 p-4 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition">
+                    <option value="Beginner">Beginner (No prior experience)</option>
+                    <option value="Intermediate">Intermediate (Basic fundamentals mastered)</option>
+                    <option value="Advanced">Advanced (Looking to specialize & master)</option>
+                </select>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">
+                        Daily Study Hours
+                    </label>
+                    <input
+                        type="number"
+                        name="hours"
+                        required
+                        min="1"
+                        max="24"
+                        placeholder="e.g. 2"
+                        class="w-full bg-zinc-800/90 border border-zinc-700/80 p-4 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
+                    >
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">
+                        Duration (Months)
+                    </label>
+                    <input
+                        type="number"
+                        name="months"
+                        required
+                        min="1"
+                        max="24"
+                        placeholder="e.g. 3"
+                        class="w-full bg-zinc-800/90 border border-zinc-700/80 p-4 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
+                    >
+                </div>
+            </div>
+
+            <button
+                type="submit"
+                id="generateBtn"
+                class="w-full bg-orange-500 hover:bg-orange-600 active:scale-[0.99] py-4 rounded-xl font-bold text-lg text-white shadow-xl shadow-orange-500/20 transition cursor-pointer flex items-center justify-center space-x-2"
+            >
+                <span>Generate Roadmap with AI</span>
+            </button>
+        </form>
+    </div>
+</main>
+
+<script>
+    const form = document.getElementById('roadmapForm');
+    const btn = document.getElementById('generateBtn');
+
+    form.addEventListener('submit', () => {
+        btn.innerHTML = `
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span class="animate-pulse">Generating Custom Roadmap with AI...</span>
+        `;
+        btn.disabled = true;
+        btn.classList.add('opacity-80', 'cursor-not-allowed');
+    });
+</script>
+
+<%- include('partials/footer') %>
