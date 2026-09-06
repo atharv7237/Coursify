@@ -1,0 +1,226 @@
+<%- include('partials/header', { title: roadmap && roadmap.generatedroadmap ? (roadmap.generatedroadmap.roadmapTitle || roadmap.goal) : 'Roadmap Details' }) %>
+<%- include('partials/nav') %>
+
+<main class="flex-grow max-w-6xl mx-auto px-6 py-10 w-full">
+    <%- include('partials/flash') %>
+
+    <!-- Action Bar -->
+    <div class="flex items-center justify-between gap-4 mb-8">
+        <a href="/roadmap/dashboards" class="inline-flex items-center space-x-2 text-sm font-medium text-zinc-400 hover:text-white transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            <span>Back to Dashboard</span>
+        </a>
+
+        <form action="/roadmap/delete/<%= roadmap._id %>" method="POST" onsubmit="return confirm('Are you sure you want to delete this roadmap?');">
+            <button type="submit" class="inline-flex items-center space-x-1.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 px-4 py-2 rounded-xl text-sm font-medium transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                </svg>
+                <span>Delete Roadmap</span>
+            </button>
+        </form>
+    </div>
+
+    <% if (roadmap && roadmap.generatedroadmap) { %>
+        <!-- Hero Summary Section -->
+        <section class="bg-zinc-900/90 border border-orange-500/20 rounded-3xl p-8 md:p-10 mb-10 shadow-2xl">
+            <div class="flex items-center space-x-2 text-xs font-semibold uppercase text-orange-400 mb-3">
+                <span class="px-2.5 py-1 rounded-md bg-orange-500/10 border border-orange-500/30">
+                    <%= roadmap.level %> Level
+                </span>
+                <span class="text-zinc-500">•</span>
+                <span class="text-zinc-400"><%= roadmap.hours %> Hours / Day</span>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">
+                <%= roadmap.generatedroadmap.roadmapTitle || roadmap.goal %>
+            </h1>
+
+            <p class="text-zinc-300 text-lg leading-relaxed max-w-4xl">
+                <%= roadmap.generatedroadmap.overview %>
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 pt-8 border-t border-zinc-800">
+                <div class="bg-zinc-800/60 p-4 rounded-xl border border-zinc-700/50">
+                    <p class="text-xs text-zinc-400 uppercase font-semibold">Total Duration</p>
+                    <p class="text-xl font-bold text-white mt-1">
+                        <%= roadmap.generatedroadmap.duration || 'Flexible' %>
+                    </p>
+                </div>
+
+                <div class="bg-zinc-800/60 p-4 rounded-xl border border-zinc-700/50">
+                    <p class="text-xs text-zinc-400 uppercase font-semibold">Daily Commitment</p>
+                    <p class="text-xl font-bold text-white mt-1">
+                        <%= roadmap.generatedroadmap.studyHoursPerDay || (roadmap.hours + ' Hours/Day') %>
+                    </p>
+                </div>
+
+                <div class="bg-zinc-800/60 p-4 rounded-xl border border-zinc-700/50">
+                    <p class="text-xs text-zinc-400 uppercase font-semibold">Target Level</p>
+                    <p class="text-xl font-bold text-white mt-1"><%= roadmap.level %></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills You'll Gain -->
+        <% if (roadmap.generatedroadmap.skillsGained && roadmap.generatedroadmap.skillsGained.length > 0) { %>
+            <section class="mb-12">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-5 flex items-center space-x-2">
+                    <span>💡</span>
+                    <span>Skills You Will Master</span>
+                </h2>
+                <div class="flex flex-wrap gap-2.5">
+                    <% roadmap.generatedroadmap.skillsGained.forEach((skill) => { %>
+                        <span class="bg-orange-500/10 border border-orange-500/30 text-orange-300 text-sm font-medium px-4 py-2 rounded-xl">
+                            <%= skill %>
+                        </span>
+                    <% }) %>
+                </div>
+            </section>
+        <% } %>
+
+        <!-- Learning Milestones -->
+        <% if (roadmap.generatedroadmap.milestones && roadmap.generatedroadmap.milestones.length > 0) { %>
+            <section class="mb-12">
+                <h2 class="text-3xl font-black text-white mb-8 flex items-center space-x-2">
+                    <span>🗺️</span>
+                    <span>Step-by-Step Learning Milestones</span>
+                </h2>
+
+                <div class="space-y-8">
+                    <% roadmap.generatedroadmap.milestones.forEach((milestone, idx) => { %>
+                        <div class="bg-zinc-900/90 border border-orange-500/20 rounded-3xl p-6 md:p-8 shadow-xl">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4">
+                                <div class="flex items-center space-x-3">
+                                    <span class="w-8 h-8 rounded-lg bg-orange-500 text-white font-bold flex items-center justify-center text-sm">
+                                        <%= idx + 1 %>
+                                    </span>
+                                    <h3 class="text-2xl font-bold text-orange-400">
+                                        <%= milestone.title %>
+                                    </h3>
+                                </div>
+                                <span class="text-xs font-semibold text-zinc-400 px-3 py-1 bg-zinc-800 rounded-lg w-fit">
+                                    <%= milestone.duration %>
+                                </span>
+                            </div>
+
+                            <p class="text-zinc-300 mb-6 text-base">
+                                <%= milestone.description %>
+                            </p>
+
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <!-- Topics -->
+                                <% if (milestone.topics && milestone.topics.length > 0) { %>
+                                    <div class="bg-zinc-800/50 p-5 rounded-2xl border border-zinc-700/50">
+                                        <h4 class="text-sm font-semibold uppercase text-zinc-300 tracking-wider mb-3 flex items-center space-x-2">
+                                            <span>📚</span>
+                                            <span>Topics to Learn</span>
+                                        </h4>
+                                        <ul class="space-y-2 text-sm text-zinc-300">
+                                            <% milestone.topics.forEach((topic) => { %>
+                                                <li class="flex items-start space-x-2">
+                                                    <span class="text-orange-500 font-bold">✓</span>
+                                                    <span><%= topic %></span>
+                                                </li>
+                                            <% }) %>
+                                        </ul>
+                                    </div>
+                                <% } %>
+
+                                <!-- Why Important -->
+                                <% if (milestone.whyImportant && milestone.whyImportant.length > 0) { %>
+                                    <div class="bg-zinc-800/50 p-5 rounded-2xl border border-zinc-700/50">
+                                        <h4 class="text-sm font-semibold uppercase text-zinc-300 tracking-wider mb-3 flex items-center space-x-2">
+                                            <span>🎯</span>
+                                            <span>Why It Matters</span>
+                                        </h4>
+                                        <ul class="space-y-2 text-sm text-zinc-300">
+                                            <% milestone.whyImportant.forEach((reason) => { %>
+                                                <li class="flex items-start space-x-2">
+                                                    <span class="text-orange-400 font-bold">•</span>
+                                                    <span><%= reason %></span>
+                                                </li>
+                                            <% }) %>
+                                        </ul>
+                                    </div>
+                                <% } %>
+                            </div>
+
+                            <!-- Resources -->
+                            <% if (milestone.resources && milestone.resources.length > 0) { %>
+                                <div class="mt-6">
+                                    <h4 class="text-sm font-semibold uppercase text-zinc-300 tracking-wider mb-3 flex items-center space-x-2">
+                                        <span>🔗</span>
+                                        <span>Recommended Resources</span>
+                                    </h4>
+                                    <div class="grid sm:grid-cols-2 gap-3">
+                                        <% milestone.resources.forEach((resource) => { %>
+                                            <div class="bg-zinc-800/80 p-3.5 rounded-xl border border-zinc-700/60 flex items-center justify-between">
+                                                <div>
+                                                    <p class="font-semibold text-sm text-white"><%= resource.title %></p>
+                                                    <p class="text-xs text-zinc-400 mt-0.5"><%= resource.type %> • <%= resource.platform %></p>
+                                                </div>
+                                                <span class="text-xs font-semibold px-2 py-1 rounded bg-orange-500/20 text-orange-400">Free</span>
+                                            </div>
+                                        <% }) %>
+                                    </div>
+                                </div>
+                            <% } %>
+
+                            <!-- Mini Project -->
+                            <% if (milestone.project && (milestone.project.title || milestone.project.description)) { %>
+                                <div class="mt-6 bg-orange-500/10 border border-orange-500/30 p-5 rounded-2xl">
+                                    <div class="flex items-center space-x-2 mb-2">
+                                        <span class="text-lg">🛠️</span>
+                                        <h4 class="font-bold text-white text-base">Milestone Project: <%= milestone.project.title %></h4>
+                                    </div>
+                                    <p class="text-sm text-zinc-300 leading-relaxed">
+                                        <%= milestone.project.description %>
+                                    </p>
+                                </div>
+                            <% } %>
+                        </div>
+                    <% }) %>
+                </div>
+            </section>
+        <% } %>
+
+        <!-- Capstone Project -->
+        <% if (roadmap.generatedroadmap.finalProject && roadmap.generatedroadmap.finalProject.title) { %>
+            <section class="bg-gradient-to-br from-orange-500/15 via-zinc-900 to-zinc-900 border border-orange-500/30 rounded-3xl p-8 md:p-10 mb-10 shadow-2xl">
+                <div class="flex items-center space-x-2 text-xs font-semibold uppercase text-orange-400 mb-2">
+                    <span>🚀 Capstone Project</span>
+                </div>
+                <h2 class="text-3xl font-black text-white mb-3">
+                    <%= roadmap.generatedroadmap.finalProject.title %>
+                </h2>
+                <p class="text-zinc-300 text-base leading-relaxed">
+                    <%= roadmap.generatedroadmap.finalProject.description %>
+                </p>
+            </section>
+        <% } %>
+
+        <!-- Expected Outcome -->
+        <% if (roadmap.generatedroadmap.expectedOutcome) { %>
+            <section class="bg-zinc-900/90 border border-zinc-800 rounded-3xl p-8 mb-10">
+                <h2 class="text-2xl font-bold text-white mb-3 flex items-center space-x-2">
+                    <span>🏆</span>
+                    <span>Expected Outcome</span>
+                </h2>
+                <p class="text-zinc-300 text-base leading-relaxed">
+                    <%= roadmap.generatedroadmap.expectedOutcome %>
+                </p>
+            </section>
+        <% } %>
+    <% } else { %>
+        <div class="text-center py-20 bg-zinc-900 rounded-3xl border border-zinc-800 p-8">
+            <h2 class="text-2xl font-bold text-red-400 mb-2">Roadmap details could not be loaded.</h2>
+            <p class="text-zinc-400 text-sm mb-6">Please return to your dashboard and generate a new roadmap.</p>
+            <a href="/roadmap/dashboards" class="inline-block bg-orange-500 px-6 py-3 rounded-xl font-semibold text-white">Back to Dashboard</a>
+        </div>
+    <% } %>
+</main>
+
+<%- include('partials/footer') %>
